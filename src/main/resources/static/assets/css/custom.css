@@ -1,0 +1,45 @@
+/* Add here all your css styles (customizations) */
+.aces-topbar-v1 {
+	background: #111; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.dropdown-menu li i {
+	font-size: 18px;
+	margin-right: 4px;
+}
+
+.header-logo {
+	font-size: 30px;
+	margin-top: 15px;
+	margin-right: 4px;
+}
+.btn-u.disabled,
+.btn-u[disabled],
+fieldset[disabled] .btn-u {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .65;
+}
+
+body.modal-open .modal.in {
+  display: flex !important;
+  align-items: center;
+}
+
+.cross-red {
+    color: #B40404;
+}
+.check-green {
+    color: green;
+}
+.cursor-pointer {
+   padding: 5px;
+   cursor: pointer 
+}
+.help-blue {
+    color: #428bca;
+}

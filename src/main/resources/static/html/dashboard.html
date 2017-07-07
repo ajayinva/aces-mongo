@@ -1,0 +1,131 @@
+<div class="container content" ng-controller="dashboardController">	
+	<div ng-include="'html/common/loading.html'"></div>
+	<div ng-show="tempData.showPage">
+		<div class="row margin-bottom-10">
+			<div class="col-md-12">									
+				<div class="btn-group">					
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						Settings&nbsp;<i class="fa fa-caret-down"></i>
+						<span class="sr-only">Toggle Dropdown</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="accountSettingsPath">Change Password</a></li>					
+					</ul>
+				</div>				
+				<span class="pull-right">			
+					<a class="btn-u" href="createQuizPath?planId={{initData.plan.id}}">Create Quiz</a>
+					<a class="btn-u" href="createExamPath?planId={{initData.plan.id}}">Create Exam</a>			
+				</span>
+			</div>
+		</div>
+		<div class="alert alert-success" role="alert" data-ng-if="deleteExamData.deleted">
+			<div class='text-info'>
+				<div class="text-info">Quiz/Exam Deleted</div>
+			</div>						
+		</div>
+		<div class="panel panel-info" ng-if="initData.finalExams.length>0">			
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-tasks"></i>Exam History</h3>
+			</div>
+			<div class="table-responsive">			
+				<table class="table table-bordered table-hover">	
+					<thead>
+						<tr class='bg-color-grey'>
+							<th>Name</th>
+							<th>Action</th>																			
+							<th>Status</th>	
+							<th>Created On</th>	
+							<th>Action</th>											
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="exam in initData.finalExams | orderBy : 'id' : 'desc' | limitTo:tempData.perPage:tempData.examStartAt"">
+							<td>
+								{{exam.name}}
+							</td>
+							<td>							
+								<a class="btn btn-default btn-sm" ng-if="exam.status==1" href="examSummaryPath?planId={{initData.plan.id}}&examId={{exam.id}}"><i class="fa fa-eye"></i>&nbsp;View</a>							
+								<a class="btn btn-default btn-sm" ng-if="exam.status==0" href="#" ng-click="resumeExam(exam.id)"><i class="fa fa-share"></i>&nbsp;Resume</a>																	
+							</td>							
+							<td>
+								<span ng-if="exam.status==1" class="label label-success">Completed</span>
+								<span ng-if="exam.status==0" class="label label-warning">In Progress</span>
+								<span ng-if="exam.status==null"class="label label-info">Not Created</span>
+							</td>
+							<td>{{exam.creationDateToDisplay|date:"dd-MMM-yyyy 'at' h:mma"}}</td>													
+							<td><a class="btn btn-default btn-sm" href="javascript:;" ng-click="deleteExam(exam.id)"><i class="fa fa-times-circle"></i>&nbsp;Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>				
+		</div>
+		<div class="row" ng-if="initData.finalExams.length>0">
+			<div class="col-md-6">
+				<uib-pagination id="paginationElem" class="pagination-sm" style="cursor:pointer;"
+					total-items="initData.finalExams.length" items-per-page="5"
+					ng-model="tempData.examPageNumber" max-size="5" boundary-links="true" ng-change="paginateExam()"
+					previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+				</uib-pagination>
+			</div>	
+		</div>	
+		<div class="panel panel-info" ng-if="initData.finalExams.length==0">					
+			<div class="panel-body">
+				<div class="alert alert-success">
+					<div class="text-info">You have not taken any Exam. Click on "Create Exam" to create a new Exam</div>						
+				</div>	
+			</div>	
+		</div>
+		<div class="panel panel-info" ng-if="initData.quizes.length>0">			
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-tasks"></i>Flashcards/Quiz History</h3>
+			</div>
+			<div class="table-responsive">			
+				<table class="table table-bordered table-hover">	
+					<thead>
+						<tr class='bg-color-grey'>
+							<th>Name</th>
+							<th>Action</th>																			
+							<th>Status</th>	
+							<th>Created On</th>
+							<th>Action</th>												
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="exam in initData.quizes | orderBy : 'id' : 'desc' | limitTo:tempData.perPage:tempData.quizStartAt"">
+							<td>
+								{{exam.name}}
+							</td>
+							<td>							
+								<a class="btn btn-default btn-sm" ng-if="exam.status==1" href="examSummaryPath?planId={{initData.plan.id}}&examId={{exam.id}}"><i class="fa fa-eye"></i>&nbsp;View</a>							
+								<a class="btn btn-default btn-sm" ng-if="exam.status==0" href="#" ng-click="resumeExam(exam.id)"><i class="fa fa-share"></i>&nbsp;Resume</a>																	
+							</td>							
+							<td>
+								<span ng-if="exam.status==1" class="label label-success">Completed</span>
+								<span ng-if="exam.status==0" class="label label-warning">In Progress</span>
+								<span ng-if="exam.status==null"class="label label-info">Not Created</span>
+							</td>
+							<td>{{exam.creationDateToDisplay|date:"dd-MMM-yyyy 'at' h:mma"}}</td>	
+							<td><a class="btn btn-default btn-sm" href="javascript:;" ng-click="deleteExam(exam.id)"><i class="fa fa-times-circle"></i>&nbsp;Delete</a></td>												
+						</tr>
+					</tbody>
+				</table>
+			</div>				
+		</div>
+		<div class="row" ng-if="initData.quizes.length>0">
+			<div class="col-md-6">
+				<uib-pagination id="paginationElem" class="pagination-sm" style="cursor:pointer;"
+					total-items="initData.quizes.length" items-per-page="5"
+					ng-model="tempData.quizPageNumber" max-size="5" boundary-links="true" ng-change="paginateQuiz()"
+					previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+				</uib-pagination>
+			</div>	
+		</div>	
+		<div class="panel panel-info" ng-if="initData.quizes.length==0">					
+			<div class="panel-body">
+				<div class="alert alert-success">
+					<div class="text-info">You have not taken any Quiz. Click on "Create Quiz" to create a new Quiz</div>						
+				</div>	
+			</div>	
+		</div>		
+	</div>
+</div>

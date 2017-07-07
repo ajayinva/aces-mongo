@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Updates the operating system
+sudo yum update -y
+
+# Makes sure that the Devopsbuddy application is up
+sudo service awsaces restart

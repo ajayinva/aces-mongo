@@ -1,0 +1,99 @@
+<div class="container content" ng-controller="examSummaryController">	
+	<div ng-include="'html/common/loading.html'"></div>
+	<div ng-show="tempData.showPage">	
+		<div class="row margin-bottom-10">			
+			<div class="col-md-12">
+				<a class="btn btn-default" href="dashboardPath">Back To Dashboard</a>
+				<button class="btn btn-default" ng-click="notes()"><i class="fa fa-sticky-note-o"></i>&nbsp;Notes</button>
+				<span class="pull-right">								
+					<a class="btn-u" href="createExamPath?planId={{tempData.planId}}">Create Exam</a>			
+				</span>
+			</div>
+		</div>
+		<div class="panel panel-info">			
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-tasks"></i>Exam Summary</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>Exam Name&nbsp;:&nbsp;</label><span class="text-info">{{initData.examName}}</span><BR>
+						<label>Total Correct&nbsp;:&nbsp;</label><span class="text-info">{{initData.correct}}</span>
+					</div>
+					<div class="col-md-4">
+						<label>Total Question&nbsp;:&nbsp;</label><span class="text-info">{{initData.total}}</span><BR/>
+						<label>Total Incorrect&nbsp;:&nbsp;</label><span class="text-info">{{initData.incorrect}}</span>
+					</div>
+					<div class="col-md-4">
+						<label>Status&nbsp;:&nbsp;</label>
+						<span ng-if="initData.status==1" class="label label-success">Completed</span>
+						<span ng-if="initData.status==0" class="label label-warning">In Progress</span>
+						<span ng-if="initData.status==null"class="label label-info">Not Created</span>
+						<BR>
+						<label>Percentage&nbsp;:&nbsp;</label><span class="text-info">{{initData.percentage|number:0}}%</span>
+					</div>
+				</div>	
+			</div>
+		</div>	
+		<div class="panel panel-info">			
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-exclamation-triangle"></i>Question-{{initData.question.code}} ({{initData.examQuestion.questionNumber}} of {{initData.total}})
+					<span ng-if="initData.examQuestion.correct==1" class="label label-success">Correct</span>
+					<span ng-if="initData.examQuestion.correct==null" class="label label-danger">Incorrect</span>
+					<span class="pull-right">						
+						<button ng-class="getStarredClass()" ng-disabled='true'>&nbsp;<i class="fa fa-star"></i></button>
+					</span>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<H5><span class="text-info" ng-bind-html="initData.question.text | unsafeHTML"></span></H5>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div class="panel panel-info">			
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-tasks"></i>Options</h3>
+			</div>
+			<div class="panel-body">	
+				<div ng-if="initData.question.numberOfCorrectOptions==1" class="row" ng-repeat="option in initData.question.options | orderBy :'id'">
+					<div class="col-md-12 radio">
+						<H5>
+							<label>
+								<input type="radio" id="option{{option.id}}" ng-disabled='true' name="option" ng-value='option.id' ng-model="tempData.option">
+									&nbsp;
+									<span class="text-info" ng-bind-html="option.option | unsafeHTML"></span>
+									<i ng-if="option.correct" class="fa fa-check check-green"></i>
+									<i ng-if="!option.correct" class="fa fa-times cross-red"></i>									
+							</label> 
+						</H5>
+					</div>
+				</div>
+				<div ng-if="initData.question.numberOfCorrectOptions > 1" class="row" ng-repeat="option in initData.question.options | orderBy :'id'">
+					<div class="col-md-12 checkbox">
+						<H5>
+							<label>
+								<input type="checkbox" id="option{{option.id}}" ng-disabled='true' name="option" ng-model="option.selected">
+								&nbsp;
+								<span class="text-info" ng-bind-html="option.option | unsafeHTML"></span> 
+								<i ng-if="option.correct" class="fa fa-check check-green"></i>
+								<i ng-if="!option.correct" class="fa fa-times cross-red"></i>								
+							</label>
+						</H5>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<button class="btn-u" ng-disabled="initData.examQuestion.previousQuestionId==null" ng-click="previous()"><i class="fa fa-arrow-circle-left"></i>&nbsp;Previous</button>
+				<span class="pull-right">																		
+					<button class="btn-u" ng-disabled="initData.examQuestion.nextQuestionId==null" ng-click="next()">Next&nbsp;<i class="fa fa-arrow-circle-right"></i></button>					
+				</span>
+			</div>
+		</div>	
+	</div>
+</div>

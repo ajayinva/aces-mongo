@@ -1,0 +1,80 @@
+<div class="container content" data-ng-controller="loginController">	
+	<div ng-include="'html/common/loading.html'"></div>		
+	<div ng-show="tempData.showPage">
+		<div class="alert alert-danger" role="alert" data-ng-show="tempData.authenticationFailed">
+			Invalid User Name / Password
+		</div>
+		<div class="alert alert-success" role="alert" data-ng-if="tempData.successFullRegistrationMessage">
+			<div class='text-success'>
+				{{tempData.successFullRegistrationMessage}}
+			</div>						
+		</div>	
+		<div class="alert alert-success" role="alert" data-ng-if="resetPasswordData.mailSent">
+			<div class='text-success'>
+				Please check your email. We have sent you a link to reset your password
+			</div>						
+		</div>	
+		<div class="row">
+			<div class="col-md-6 col-sm-12">			
+				<div class="panel panel-info">			
+					<div class="panel-heading">
+						<h2 class="panel-title">Login to your account</h2>
+					</div>
+					<div class="panel-body">
+						<div class="input-group margin-bottom-20">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" placeholder="Email" class="form-control" data-ng-model="initData.username">
+						</div>
+						<div class="input-group margin-bottom-20">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" placeholder="Password" class="form-control" data-ng-model="initData.password">
+						</div>
+						<div class="row">
+							<div class="col-md-6"></div>
+							<div class="col-md-6">
+								<button class="btn-u pull-right" data-ng-click="login()" data-ng-disabled="isDisabled()">Login</button>
+							</div>
+						</div>					
+					</div>
+				</div>
+			</div>			
+			<div class="col-md-6 col-sm-12">						
+				<div class="panel panel-info">			
+					<div class="panel-heading">
+						<h2 class="panel-title">Forgot your Password ?</h2>
+					</div>
+					<div class="panel-body">
+						<div class="input-group margin-bottom-20">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" placeholder="Email" class="form-control" data-ng-model="resetPasswordData.email">
+						</div>
+						<div class="row">
+							<div class="col-md-12 margin-bottom-20">
+								<span class="text-info">No worries, provide your email and we will reset it</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6"></div>
+							<div class="col-md-6">
+								<button class="btn-u pull-right" data-ng-click="resetPassword()" data-ng-disabled="isResetPasswordDisabled()">Reset Password</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">			
+				<div class="panel panel-info">			
+					<div class="panel-heading">
+						<h2 class="panel-title">Do not have an account yet ?</h2>
+					</div>
+					<div class="panel-body">
+						<a href="registerPath" class="btn-u pull-right">Register Here</a>
+					</div>
+				</div>						
+			</div>
+		</div>
+		<BR/><BR/><BR/><BR/><BR/><BR/><BR/>
+	</div>
+</div>

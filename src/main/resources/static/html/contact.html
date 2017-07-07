@@ -1,0 +1,68 @@
+<div class="container content" data-ng-controller="contactController">
+	<div ng-include="'html/common/loading.html'"></div>
+	<div ng-show="tempData.showPage">
+		<div class="alert alert-danger" role="alert" data-ng-if="saveData.error">
+			<div class='text-danger' data-ng-repeat="message in saveData.messageList">
+				{{message.message}}
+			</div>						
+		</div>
+		<div class="alert alert-success" role="alert" data-ng-if="saveData.message">
+			<div class='text-success'>
+				{{saveData.message}}
+			</div>						
+		</div>
+		<div class="row margin-bottom-30">
+			<div class="col-md-8 mb-margin-bottom-30">			
+				<div class="tag-box tag-box-v2">
+					<p>Your feedback is important to us. Please use the below form in order to contact us. We will be in touch within 24 hours.</p>					
+				</div>
+				<div class="row">
+					<div class="col-md-11">
+						<span class="text-info">Fields marked with an <span class="color-red">*</span> are required</span>
+					</div>
+				</div>							
+				<div class="row">
+					<div class="col-md-7">
+						<div class="form-group">
+							<label for="name">Name <span class="color-red">*</span></label>
+							<input type="text" name="name" id="name" class="form-control" data-ng-model="initData.dto.name">
+							<div class="text-danger">{{saveData.messages['name']}}</div>
+						</div>
+					</div>
+				</div>			
+				<div class="row">
+					<div class="col-md-7">
+						<div class="form-group">
+							<label for="email">Email <span class="color-red">*</span></label>
+							<input type="text" name="email" id="email" class="form-control" data-ng-model="initData.dto.email">
+							<div class="text-danger">{{saveData.messages['email']}}</div>
+						</div>
+					</div>
+				</div>			
+				<div class="row">
+					<div class="col-md-11">
+						<div class="form-group">
+							<label for="message">Message <span class="color-red">*</span></label>
+							<textarea rows="8" name="message" id="message" class="form-control" data-ng-model="initData.dto.message"></textarea>
+							<div class="text-danger">{{saveData.messages['message']}}</div>
+							<div class="pull-right" ng-class='getMessageClass()'>{{remainingMessage()}}/{{tempData.maxLength}} characters remaining</div>
+						</div>
+					</div>
+				</div>								
+				<button class="btn-u" data-ng-click="contact()">Send Message</button>				
+			</div>
+			<div class="col-md-4">
+				<div class="headline"><h2>Contacts</h2></div>
+				<ul class="list-unstyled who margin-bottom-30">
+					<li><i class="fa fa-envelope"></i>support@awsaces.com</li>				
+					<li><i class="fa fa-globe"></i><a href="http://www.awsaces.com">http://www.awsaces.com</a></li>
+					<li>
+						<a href="https://www.linkedin.com/in/ajay-agarwal-b7882222/" target="footer" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+							<i class="fa fa-linkedin"></i> Linkedin
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container content" data-ng-controller="registerController">	
+	<div ng-include="'html/common/loading.html'"></div>		
+	<div ng-show="tempData.showPage">
+		<div class="alert alert-danger" role="alert" data-ng-if="saveData.error">
+			<div class='text-danger' data-ng-repeat="message in saveData.messageList">
+				{{message.message}}
+			</div>						
+		</div>	
+		<div class="row">
+			<div class="col-md-7">															
+				<div class="panel panel-info">			
+					<div class="panel-heading">
+						<h2 class="panel-title">Register a new account ?</h2>
+					</div>
+					<div class="panel-body">				
+						<div class="row">
+							<div class="col-md-12">
+								<div class="reg-header">
+									<span class="text-info">Fields marked with an <span class="color-red">*</span> are required</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Name <span class="color-red">*</span></label>
+									<input type="text" class="form-control" maxlength='100' ng-model="initData.registerDto.name">
+									<div class="text-danger">{{saveData.messages['name']}}</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Email Address <span class="color-red">*</span></label>
+									<input type="text" class="form-control" maxlength='100' ng-model="initData.registerDto.email">
+									<div class="text-danger">{{saveData.messages['email']}}</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Password <span class="color-red">*</span></label>
+											<input type="password" class="form-control" maxlength='30' ng-model="initData.registerDto.password">
+											<div class="text-danger">{{saveData.messages['password']}}</div>
+											<div class="text-danger">{{saveData.messages['passwordMatching']}}</div>
+											<div class="text-danger">{{saveData.messages['passwordValid']}}</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Confirm Password <span class="color-red">*</span></label>
+											<input type="password" class="form-control" maxlength='30' ng-model="initData.registerDto.confirmPassword">
+											<div class="text-danger">{{saveData.messages['confirmPassword']}}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="reg-header">
+									<h2>Password Policy</h2>
+									<div class="row">
+										<div class="col-md-12">
+											<div ng-include="'html/passwordpolicy.html'"></div>										
+										</div>
+									</div>	
+								</div>	
+							</div>
+						</div>						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-8 checkbox">
+										<div vc-recaptcha key="'6LfkJxUUAAAAAGn1hKMS46IeB0Uf6y0mSKsFgqXw'" ng-model="initData.registerDto.recaptchaResponse" on-create="setWidgetId(widgetId)" on-expire="captchaExpiration()"></div>
+										<div class="text-danger">{{saveData.messages['recaptchaResponse']}}</div>						
+									</div>
+									<div class="col-md-4 text-right">
+										<button class="btn-u" ng-click="register()">Register</button>
+									</div>
+								</div>
+							</div>
+						</div>	
+						<div class="text-danger">{{saveData.captchaMessage}}</div>	
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="panel panel-info">			
+					<div class="panel-heading">
+						<h2 class="panel-title">Already have an account ?</h2>
+					</div>
+					<div class="panel-body">
+						<a href="loginPath" class="btn-u">Login Here</a>
+					</div>
+				</div>				
+			</div>					
+		</div>
+	</div>
+</div>

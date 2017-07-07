@@ -1,0 +1,89 @@
+<div class="container content" ng-controller="examConfirmController">	
+	<div ng-include="'html/common/loading.html'"></div>
+	<div ng-show="tempData.showPage">
+		<div class="row margin-bottom-10">			
+			<div class="col-md-12">
+				<a class="btn btn-default" href="dashboardPath">Back To Dashboard</a>
+				<span class="pull-right">			
+					<a class="btn-u" href="createExamPath?planId={{tempData.planId}}">Create Exam</a>			
+				</span>
+			</div>
+		</div>	
+		<div class="alert alert-warning" ng-if="!tempData.confirm">
+			<div class="text-info">You have reached the end of the exam. To submit for evaluation click "Complete Exam". To review all the questions click "Review Exam"</div>						
+		</div>
+		<div class="alert alert-success" ng-if="tempData.confirm">
+			<div class="text-info">The exam is now complete.To review all the questions click "Review Exam"</div>						
+		</div>		
+		<div class="panel panel-info">			
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-tasks"></i>Exam Summary</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>Exam Name&nbsp;:&nbsp;</label><span class="text-info">{{initData.examName}}</span>
+					</div>
+					<div class="col-md-4">
+						<label>Total Question&nbsp;:&nbsp;</label><span class="text-info">{{initData.total}}</span>
+					</div>
+					<div class="col-md-4">
+						<label>Status&nbsp;:&nbsp;</label>
+						<span ng-if="initData.status==1" class="label label-success">Completed</span>
+						<span ng-if="initData.status==0" class="label label-warning">In Progress</span>
+						<span ng-if="initData.status==null"class="label label-info">Not Created</span>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-md-4">
+						<label>Total Answered&nbsp;:&nbsp;</label><span class="text-info">{{initData.totalAnswered}}</span>
+					</div>
+					<div class="col-md-4">
+						<label>Total Skipped&nbsp;:&nbsp;</label><span class="text-info">{{initData.totalSkipped}}</span>
+					</div>
+				</div>	
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-success">			
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="fa fa-tasks"></i>Correct</h3>
+					</div>
+					<div class="panel-body">
+						<span style="font-size:5em">{{initData.correct || 0}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-danger">			
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="fa fa-tasks"></i>Incorrect</h3>
+					</div>
+					<div class="panel-body">
+						<span style="font-size:5em">{{initData.incorrect || 0}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-info">			
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="fa fa-tasks"></i>Percentage</h3>
+					</div>
+					<div class="panel-body">
+						<span style="font-size:5em">{{(initData.percentage || 0) | number:0}}%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a class="btn-u" ng-if="tempData.confirm" href="examSummaryPath?planId={{tempData.planId}}&examId={{tempData.examId}}"><i class="fa fa-arrow-circle-left"></i>&nbsp;Review Exam</a>
+				<button class="btn-u" ng-if="!tempData.confirm" ng-click="resumeExam()"><i class="fa fa-arrow-circle-left"></i>&nbsp;Review Exam</button>
+				<span class="pull-right">																		
+					<button class="btn-u" ng-if="!tempData.confirm" ng-click="submit()">Complete Exam&nbsp;<i class="fa fa-arrow-circle-up"></i></button>
+				</span>
+			</div>
+		</div>	
+	</div>
+</div>

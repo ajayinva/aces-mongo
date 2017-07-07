@@ -1,0 +1,50 @@
+<div class="container content profile" ng-controller="productController">
+	<div ng-include="'html/common/loading.html'"></div>
+	<div class="profile-body" ng-show="tempData.showPage">
+		<div class="row portfolio-item margin-bottom-50">
+			<div class="col-md-12 md-margin-bottom-40">
+				<h2>{{initData.product.name}}</h2>
+				<p>{{initData.product.description}}</p>
+				<div class="row portfolio-item1">
+					<div class="col-md-6 col-xs-12">
+						<ul class="list-unstyled">
+							<li ng-repeat="feature in initData.product.features | orderBy:'id' | limitTo : 4"><i class="fa fa-graduation-cap color-green"></i>{{feature.feature}}</li>
+						</ul>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<ul class="list-unstyled">
+							<li ng-repeat="feature in initData.product.features | orderBy:'id' | limitTo : 4 : 4"><i class="fa fa-graduation-cap color-green"></i>{{feature.feature}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="margin-bottom-20 clearfix"></div>
+		<div class="row margin-bottom-40">
+			<div class="col-md-3 col-sm-12" ng-repeat="plan in initData.product.plans | orderBy:'id'">
+				<div class="pricing hover-effect">
+					<div ng-if="plan.best" class="sticker-left">Best Value</div>
+					<div class="pricing-head">
+						<h3 ng-if="plan.free">Free Trail</h3>
+						<h3 ng-if="!plan.free">{{plan.months}} Months</h3>
+						<h4><i>$</i>{{plan.price}}</h4>
+					</div>
+					<ul class="pricing-content list-unstyled">
+						<li ng-repeat="feature in plan.features | orderBy:'id'"><i class="fa fa-graduation-cap"></i> {{feature.feature}}</li>
+					</ul>
+					<div class="pricing-footer">
+						<p></p>
+						<a ng-if="plan.free" ng-click="tryOrBuyNow()" class="btn-u">
+							<i class="fa fa-lightbulb-o"></i> 
+							<span ng-if="plan.free">Try Now</span>
+						</a>
+						<a ng-if="!plan.free" ng-click="tryOrBuyNow()" class="btn-u">
+							<i class="fa fa-shopping-cart"></i> 
+							<span>Buy Now</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container content" ng-controller="examController">
+	<div ng-include="'html/common/loading.html'"></div>
+	<div ng-show="tempData.showPage">
+		<div class="row margin-bottom-10">			
+			<div class="col-md-2">
+				<a class="btn btn-default" href="dashboardPath?planId={{tempData.planId}}">Back To Dashboard</a>
+			</div>
+			<div class="col-md-10">
+				<H3 class="pull-right">{{initData.productName}}</H3>
+			</div>
+		</div>				
+		<div class="panel panel-info">			
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-tasks"></i> Create a Quiz</h3>
+			</div>
+			<div class="panel-body">	
+				<div class="alert alert-danger" role="alert" data-ng-if="saveData.error">
+					<div class='text-danger'>
+						<div class="text-danger">{{saveData.messages['sectionOrExamRequired']}}</div>
+						<div class="text-danger">{{saveData.messages['noQuestionsFound']}}</div>
+					</div>						
+				</div>	
+				<div class="row">
+					<div class="col-md-6">
+						<H4><span class="text-info">Flashcards/Section Quizes</span></H4>
+						<div class="row" ng-repeat="section in initData.sections | orderBy :'id'">
+							<div class="col-md-12 radio">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label>
+									<input type="radio" id="section{{$index}}" name="section" ng-value="section.id" ng-model="initData.exam.selectedSection">&nbsp;&nbsp;<span class="text-info">{{section.name}}</span>
+								</label>
+								<span ng-if="section.details" popover-placement="top" popover-trigger="mouseenter" uib-popover="{{section.details}}" 
+										class="glyphicon glyphicon-question-sign help-blue cursor-pointer" style="padding-top: 0 !important">
+								</span>								
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<H4><span class="text-info">Question Type</span></H4>
+						<div class="row">
+							<div class="col-md-12 radio">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" id="questionType1" name="questionType" ng-value='1' ng-model="initData.exam.questionType">&nbsp;<span class="text-info">All</span></label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 radio">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" id="questionType2" name="questionType" ng-value='2' ng-model="initData.exam.questionType">&nbsp;<span class="text-info">Incorrect</span></label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 radio">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" id="questionType3" name="questionType" ng-value='3' ng-model="initData.exam.questionType">&nbsp;<span class="text-info">Marked For Review</span></label>	
+							</div>
+						</div>							
+					</div>
+				</div>				
+			</div>
+		</div>		
+	</div>		
+	<div class="row">
+		<div class="col-md-12">
+			<span class="pull-right">
+				<button class="btn-u" data-ng-click="createExam()">Start</button>																		
+				<a class="btn btn-default" href="dashboardPath?planId=1">Cancel</a>
+			</span>
+		</div>
+	</div>	
+<pre>{{initData|json}}</pre>
+</div>

@@ -1,0 +1,36 @@
+Public IP 	52.90.82.211
+User name 	Administrator
+Password 	p5NqHuWVKc
+
+sudo yum remove java-1.7.0-openjdk
+sudo yum install java-1.8.0-openjdk-devel
+
+copy the file awsaces to home\ec2-user
+sudo cp -f ~/awsaces /etc/init.d/
+sudo chkconfig --add awsaces
+sudo chmod +x /etc/init.d/awsaces
+
+sudo service awsaces start
+sudo service awsaces status
+sudo service awsaces stop
+sudo service awsaces restart
+
+TODO
+ 2.On buy delete old registrations and set new plan
+ 4.Timer during exam
+ 5.Time taken for exam
+12.Question Bank on S3
+13.Review Incorrect
+15.Ask a Question 
+17.Explanations
+18.Display all and disable
+
+awsacesadmin@awsaces.com/Kenya123$
+Go to Settings -> Control Panel
+support@awsaces.com/Kenya123$ 
+
+
+
+ 
+ 
+ 

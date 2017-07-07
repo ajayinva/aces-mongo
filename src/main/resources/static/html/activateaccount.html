@@ -1,0 +1,15 @@
+<div class="container content" data-ng-controller="activateAccountController">	
+	<div ng-include="'html/common/loading.html'"></div>		
+	<div ng-show="tempData.showPage">	
+		<div class="alert alert-danger" role="alert" data-ng-if="initData.error">
+			<div class='text-danger' data-ng-repeat="message in initData.messageList">
+				{{message.message}}
+			</div>						
+		</div>
+		<div class="alert alert-info" role="alert" data-ng-if="initData.invalidLink">
+			<div class='text-info'>
+				The 'Activate Account' link is either invalid or expired. Please contact <a href="loginPath"><strong>support@awsaces.com</strong></a> to activate your account.
+			</div>						
+		</div>		
+	</div>
+</div>

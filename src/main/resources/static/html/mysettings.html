@@ -1,0 +1,73 @@
+<div class="container content" ng-controller="changePasswordController">
+	<div ng-include="'html/common/loading.html'"></div>		
+	<div ng-show="tempData.showPage">
+		<div class="row margin-bottom-10">			
+			<div class="col-md-12">
+				<a class="btn btn-default" href="dashboardPath">Back To Dashboard</a>				
+			</div>
+		</div>
+		<div class="alert alert-danger" role="alert" data-ng-if="saveData.error">
+			<div class='text-danger' data-ng-repeat="message in saveData.messageList">
+				{{message.message}}
+			</div>		
+			<div class='text-danger'>
+				{{saveData.message}}
+			</div>				
+		</div>	
+		<div class="alert alert-success" role="alert" data-ng-if="saveData.success">	
+			<div class='text-success'>
+				{{saveData.message}}
+			</div>				
+		</div>															
+		<div class="panel panel-info">			
+			<div class="panel-heading">
+				<h3 class="panel-title">Change Password</h3>
+			</div>
+			<div class="panel-body">
+				<div style="margin-top:10px;">
+					<div class="row">
+						<div class="col-md-6"><H5>Name : {{initData.name}}</H5></div>				
+					</div>
+				</div>
+				<div style="margin-top:10px;margin-bottom:20px;">
+					<div class="row">
+						<div class="col-md-6"><H5>Email : {{initData.email}}</H5></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="input-group margin-bottom-20">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" placeholder="Current Password" maxlength='30' class="form-control" data-ng-model="initData.changePasswordDto.currentPassword">
+						</div>
+						<div class="text-danger">{{saveData.messages['currentPassword']}}</div>					
+						<div class="input-group margin-bottom-20">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" placeholder="New Password" maxlength='30' class="form-control" data-ng-model="initData.changePasswordDto.password">
+						</div>
+						<div class="text-danger">{{saveData.messages['password']}}</div>			
+						<div class="input-group margin-bottom-20">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" placeholder="Confirm New Password" maxlength='30' class="form-control" data-ng-model="initData.changePasswordDto.confirmPassword">
+						</div>
+						<div class="text-danger">{{saveData.messages['confirmPassword']}}</div>
+									
+					</div>
+					<div class="col-md-7">				
+						<div class="reg-header">
+							<h2>Password Policy</h2>
+							<div ng-include="'html/passwordpolicy.html'"></div>	
+						</div>	
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="text-danger">{{saveData.messages['passwordMatching']}}</div>
+						<div class="text-danger">{{saveData.messages['passwordValid']}}</div>						
+						<button class="btn-u pull-right" data-ng-disabled="isDisabled()" ng-click="change()">Change</button>
+					</div>
+				</div>	
+			</div>
+		</div>					
+	</div>	
+</div>

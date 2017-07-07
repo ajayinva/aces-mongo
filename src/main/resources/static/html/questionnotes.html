@@ -1,0 +1,57 @@
+<div ng-include="'html/common/loading.html'"></div>
+<div ng-show="tempData.showPage">
+	<div class="modal-header">
+		<span class="pull-left"><H4 class="modal-title">My Notes</H4></span>
+		<span class='pull-right'>
+			<button class="btn btn-sm btn-default rounded" ng-click="cancel()" aria-label="Cancel Modal">
+				<span class="glyphicon glyphicon-remove" style="font-size: .8em;"></span>
+			</button>
+		</span>
+	</div>
+	<div class="modal-body">	
+		<div class="alert alert-danger" role="alert" data-ng-if="saveData.error">
+			<div class='text-danger' data-ng-repeat="message in saveData.messageList">
+				{{message.message}}
+			</div>						
+		</div>
+		<div class="panel panel-info">			
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-exclamation-triangle"></i>Question					
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">						
+						<span class="text-info" ng-bind-html="initData.question.text | unsafeHTML"></span>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<i class="fa fa-sticky-note-o"></i>&nbsp;Add Notes
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div class='row'>
+					<div class="col-md-12">
+						<div class="form-group">
+							<textarea cols="50" class="form-control" rows="10" ng-model="initData.dto.notes" title="text area for comments"></textarea>
+							<div class="text-danger">{{saveData.messages['notes']}}</div>
+							<div class="pull-right" ng-class='getNotesClass()'>{{remainingNotes()}}/{{tempData.maxLength}} characters remaining</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<span class="pull-right">
+			<button class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>&nbsp;Cancel</button>
+			<button class="btn-u" ng-click="save()"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;Save</button>
+		</span>
+	</div>
+</div>
+
